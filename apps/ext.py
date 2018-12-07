@@ -31,7 +31,7 @@ migrate = Migrate()
 # 初始化数据库
 def init_db(app):
     # 数据的连接的路径
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:root@localhost:3306/flask_login?charset=utf8'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:root@localhost:3306/flask_cache?charset=utf8'
     # 打印sql语句
     app.config['SQLALCHEMY_ECHO'] = True
     # 自动提交事务
@@ -136,8 +136,9 @@ def init_caching(app: Flask):
 
 """
 文件上传配置
- pip install flask-uploads
+pip install flask-uploads
 """
+
 """
 post请求 form-data
 
@@ -172,6 +173,9 @@ def init_upload(app: Flask):
     app.config['UPLOADS_DEFAULT_DEST'] = UPLOAD_ROOT_PATH
     # 配置文件上传的最大长度
     app.config['MAX_CONTENT_LENGTH'] = 10 * 1024 * 1024
+    # 生成图片的url地址 默认x/_uploads/images/user/1/2_1.jpg
+    app.config['UPLOADS_DEFAULT_URL'] = '/static/upload/'
+    # 初始化img_set
     configure_uploads(app, img_set)
     # patch_request_class(app,size=32 * 1024 * 1024)
-    # configure_uploads(app, doc_set)
+    configure_uploads(app, doc_set)

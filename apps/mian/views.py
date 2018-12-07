@@ -3,6 +3,7 @@ import random
 
 from flask import Blueprint, render_template
 
+from apps.account.models import User
 from apps.config import BlueKeyConfig
 from apps.ext import cache
 
